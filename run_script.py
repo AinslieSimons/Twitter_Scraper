@@ -19,7 +19,7 @@ def current_time():
     return time
 
 def auth():
-    bearer_token = 'AAAAAAAAAAAAAAAAAAAAAJSsHwEAAAAAqfF55EnbTMli7aiBVHrSZABtSik%3DluB0TkuCqmwFEWJF9gMLdukkIInRHN6EWwTWRUHUumx4dneBLt'
+    bearer_token = //api_token_here
     return bearer_token
 
 
