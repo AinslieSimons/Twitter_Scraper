@@ -10,6 +10,9 @@ import time
 from timeloop import Timeloop
 from datetime import timedelta
 
+incident_name = 'tacoma'
+loop_time = 15
+
 def current_time():
     now = datetime.now()
     time = now.strftime("%d/%m/%Y %H:%M:%S")
@@ -78,7 +81,7 @@ def iterate_tweets(save_name):
     test_data_frame = pd.DataFrame()
 #   create temp dataframe for this scrape cycle
     
-    tweet_list = open_text('kj_tweets.txt')
+    tweet_list = open_text(incident_name + '.txt')
     print ("scraping " + str(len(tweet_list)) + ' tweets')
     #open the tweet list
     
@@ -104,16 +107,16 @@ def iterate_tweets(save_name):
 tl = Timeloop()
 
 print('initial data scrape...')
-iterate_tweets('kenneth_jones')
+iterate_tweets(incident_name)
 print('commencing time loop')
 
-minutes_loop_time = 60
+minutes_loop_time = loop_time
 loop_seconds = minutes_loop_time*60
 
 @tl.job(interval=timedelta(seconds=loop_seconds))
 def test_job():   
-    print ("Kenneth Jones Tweets Scraping Started At: " + current_time() + " loop set every " + str(minutes_loop_time) + " minutes")
-    iterate_tweets('kenneth_jones')
-    print ("Kenneth Jones Scraping Concluded At: " + current_time())
+    print (incident_name + " tweets Scraping Started At: " + current_time() + " loop set every " + str(minutes_loop_time) + " minutes")
+    iterate_tweets(incident_name)
+    print (incident_name + " scraping Concluded At: " + current_time())
         
 tl.start(block=True)
